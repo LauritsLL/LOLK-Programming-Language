@@ -49,6 +49,26 @@ class LangParser(Parser):
     def statement(self, p):
         """If no calculation is needed. FX: BASIC> 6"""
         return (p.expr)
+    
+    @_(r'STRING "+" STRING')
+    def expr(self, p):
+        """Concatenate STRING with STRING."""
+        return ('concatenate', p.STRING0, p.STRING1)
+    
+    @_(r'STRING "+" expr')
+    def expr(self, p):
+        """Concatenate STRING with expression."""
+        return ('concatenate', p.STRING, p.expr)
+    
+    @_(r'expr "+" STRING')
+    def expr(self, p):
+        """Concatenate expression with STRING."""
+        return ('concatenate', p.expr, p.STRING)
+    
+    @_(r'CONV_STR "(" expr ")"')
+    def expr(self, p):
+        """Convert {} to string."""
+        return ('convert_str', p.expr)
 
     @_(r'expr "+" expr')
     def expr(self, p):
@@ -84,6 +104,11 @@ class LangParser(Parser):
     def expr(self, p):
         """NUMBER in expression."""
         return ('num', p.NUMBER)
+    
+    @_(r'STRING')
+    def expr(self, p):
+        """STRING in expression."""
+        return ('str', p.STRING)
     
     @_(r'EXIT "(" ")"')
     def statement(self, p):

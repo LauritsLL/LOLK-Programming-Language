@@ -37,6 +37,15 @@ class Execute():
             return str(node[1][1:][:-1])
         elif node[0] == 'print_expr':
             return self.walkTree(node[1])
+        
+        # CONCATENATE STRINGS AND EXPRESSIONS WITH +.
+        if node[0] == 'concatenate':
+            return self.walkTree(node[1]) + self.walkTree(node[2])
+        
+        # CONVERT OBJECT TO STRINGS.
+        if node[0] == 'convert_str':
+            # Return string of object.
+            return str(self.walkTree(node[1]))
 
         # ADD, SUBTRACT, MULTIPLY AND DIVIDE
         if node[0] == 'add':

@@ -33,10 +33,10 @@ if __name__ == '__main__' and use_interpreter:
 
         # If we got data successfully - generate tokens for parser.
         if data:
-            # Parse and generate tree and run code!
+            # Parse and generate tree.
             tree = parser.parse(lexer.tokenize(data))
 
-            # Execute code!
+            # Run parsed tree and generate output.
             Execute(tree, env)
 
 
@@ -71,6 +71,7 @@ if run_file_compiler:
                     break
                 tree = parser.parse(lexer.tokenize(code))
 
+                # Run parsed tree and generate output.
                 Execute(tree, env)
             
             

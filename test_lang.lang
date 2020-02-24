@@ -6,11 +6,12 @@ show("Hello, and welcome to LANG - My own language!")
 show("In this example program I am showcasing some of the things my program can do!")
 
 !-- Equations and variables.
+!-- String, float and integer variables can be created.
 x = 50 * 3
 y = x / 5
-show(x)
-show(y)
 
 name = "Laurits"
 
-show(name)
+!-- String concatenation is also working!
+show("Hello " + name + "!")
+show("The value of X is " + string(x) + " and the value of Y is " + string(y))
