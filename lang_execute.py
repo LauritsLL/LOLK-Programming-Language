@@ -28,6 +28,9 @@ class Execute():
         # CLEAN RETURN STATEMENTS.
         if node[0] == 'num':
             return node[1]
+        # For clean strings.
+        if isinstance(node, str):
+            return str(node[1:][:-1])
 
         # PRINT STRING AND EXPRESSIONS.
         if node[0] == 'print_str':
@@ -52,7 +55,7 @@ class Execute():
         # GET LOCAL VARIABLES FROM ENVIRONMENT.
         if node[0] == 'var':
             try:
-                print(self.env[node[1]])
+                return self.env[node[1]]
             except LookupError:
                 print("Undefined variable '%s'" % node[1])
                 # If undefined, return NOTHING in bytes.
@@ -60,4 +63,4 @@ class Execute():
 
         # ASSIGN VARIABLES TO ENVIRONMENT.
         if node[0] == 'var_assign':
-            self.env[node[1]] =  self.walkTree(node[2])
+            self.env[node[1]] = self.walkTree(node[2])

@@ -1,4 +1,5 @@
 from sly import Parser
+import sys
 
 from lang_lexer import LangLexer
 
@@ -83,3 +84,8 @@ class LangParser(Parser):
     def expr(self, p):
         """NUMBER in expression."""
         return ('num', p.NUMBER)
+    
+    @_(r'EXIT "(" ")"')
+    def statement(self, p):
+        """Exit the program/interpreter."""
+        sys.exit()

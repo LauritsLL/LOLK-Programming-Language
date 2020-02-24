@@ -1,8 +1,16 @@
-!-- This is a test comment
+!-- This is a program written in my own language parsed and made with Python.
 
-!-- PRINT STATEMENT
-show("Hello World!")
-x = 10
+!-- This is a One-Line comment.
+!-- Show text - show()
+show("Hello, and welcome to LANG - My own language!")
+show("In this example program I am showcasing some of the things my program can do!")
+
+!-- Equations and variables.
+x = 50 * 3
 y = x / 5
+show(x)
+show(y)
 
-show(x * y)
+name = "Laurits"
+
+show(name)
