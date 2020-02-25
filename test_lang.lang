@@ -1,17 +1,21 @@
 !-- This is a program written in my own language parsed and made with Python.
 
-!-- This is a One-Line comment.
-!-- Show text - show()
-show("Hello, and welcome to LANG - My own language!")
-show("In this example program I am showcasing some of the things my program can do!")
+!-- The classic
+show("Hello World!")
 
-!-- Equations and variables.
-!-- String, float and integer variables can be created.
-x = 50 * 3
-y = x / 5
+!-- Variable definitions and equations work too.
+num = 200
+y = (num + 50) / 2
+!-- Unary minus operator also works.
+z = 10 - -45 + 3 * 4 + -543 * (10 - 7) / 3 + -2
+show("Z is equal to " + string(z) + "!")
 
-name = "Laurits"
+!-- If statements (All comparisons)! For now though, only one line. (And string concatenation work!)
+if num == 200 then show("The 'num' variable is equal to 200!") else show("No, the 'num' variable was equal to: " + string(num))
+if y > 100 then show("Y is bigger than 100")
+if z <= 0 then show("Z is lesser than or equal to 0")
+!-- Won't run:
+if z >= 10 then show("Z is bigger than or equal to 10")
 
-!-- String concatenation is also working!
-show("Hello " + name + "!")
-show("The value of X is " + string(x) + " and the value of Y is " + string(y))
+!-- Remember when you concatenate strings together to convert the other datatypes to strings.
+show("The variable y is equal to " + string(y))

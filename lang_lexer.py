@@ -3,7 +3,11 @@ from sly import Lexer
 
 class LangLexer(Lexer):
     """Lexer class for generating tokens. - LANG"""
-    tokens = {NAME, NUMBER, STRING, PRINT, EXIT, CONV_STR}
+    tokens = {
+        NAME, NUMBER, STRING, PRINT, EXIT, 
+        CONV_STR, IF, THEN, ELSE,
+        EQEQ, GREATER, LESSER, GE, LE,
+        }
 
     # Ignore spaces and tabs.
     ignore = "\t "
@@ -17,7 +21,18 @@ class LangLexer(Lexer):
     EXIT = r'exit'
     # Convert to string.
     CONV_STR = r'string'
+    
+    # Comparison.
+    IF = r'if'
+    THEN = r'then'
+    ELSE = r'else'
 
+    # Comparison signs.
+    EQEQ = r'=='
+    GE = r'>='
+    LE = r'<='
+    GREATER = r'>'
+    LESSER = r'<'
 
     # Variable name.
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -44,7 +59,7 @@ class LangLexer(Lexer):
         print('Line %d: Bad character %r' % (self.lineno, t.value[0]))
         self.index += 1
 
-#ZOMBIE CODE: TEST LEXING TOKENS (DON'T USE IN PRODUCTION)
+#ZOMBIE CODE: TEST LEXING TOKENS (USE WITH CAUTION)
 # if __name__ == '__main__':
 #     lexer = LangLexer()
 
