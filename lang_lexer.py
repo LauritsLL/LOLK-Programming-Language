@@ -2,7 +2,7 @@ from sly import Lexer
 
 
 class LangLexer(Lexer):
-    """Lexer class for generating tokens. - LANG"""
+    """Lexer class for generating tokens."""
     tokens = {
         NAME, NUMBER, STRING, PRINT, EXIT, 
         CONV_STR, IF, THEN, ELSE,
@@ -66,7 +66,7 @@ class LangLexer(Lexer):
 #     # Infinite loop that accepts code.
 #     while True:
 #         try:
-#             data = input('LANG> ')
+#             data = input('LOLK> ')
 #         except EOFError:
 #             break
 

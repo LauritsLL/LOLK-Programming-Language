@@ -27,7 +27,7 @@ if __name__ == '__main__' and use_interpreter:
     # Infinite loop that accepts code.
     while True:
         try:
-            data = input('LANG> ')
+            data = input('LOLK> ')
         except EOFError:
             break
 
