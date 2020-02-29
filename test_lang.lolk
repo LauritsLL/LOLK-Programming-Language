@@ -30,7 +30,7 @@ show(x+y)
 show(x++y)
 
 !-- Now function definitions and input from user also works!
-fun this_is_a() --> if get_input("What colour is your favourite? ") == "blue" then show("The user's favourite colour is blue!") else show("Why isn't your favourite colour blue???")
+fun get_fav_col() --> if get_input("What colour is your favourite? ") == "blue" then show("The user's favourite colour is blue!") else show("Why isn't your favourite colour blue???")
 
 !-- Call function.
-this_is_a()
+get_fav_col()

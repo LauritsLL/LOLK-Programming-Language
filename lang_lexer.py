@@ -74,19 +74,19 @@ class LangLexer(Lexer):
         self.index += 1
 
 #ZOMBIE CODE: TEST LEXING TOKENS (USE WITH CAUTION)
-if __name__ == '__main__':
-    lexer = LangLexer()
+# if __name__ == '__main__':
+#     lexer = LangLexer()
 
-    # Infinite loop that accepts code.
-    while True:
-        try:
-            data = input('LOLK> ')
-        except EOFError:
-            break
+#     # Infinite loop that accepts code.
+#     while True:
+#         try:
+#             data = input('LOLK> ')
+#         except EOFError:
+#             break
 
-        # If we got the code successfully - generate tokens for parser.
-        if data:
-            # Print tokens for now.
-            tokens = lexer.tokenize(data)
-            for token in tokens:
-                print(token)
+#         # If we got the code successfully - generate tokens for parser.
+#         if data:
+#             # Print tokens for now.
+#             tokens = lexer.tokenize(data)
+#             for token in tokens:
+#                 print(token)
