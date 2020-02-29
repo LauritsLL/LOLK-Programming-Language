@@ -26,11 +26,6 @@ class LangParser(Parser):
         """Assign an "expression" variable. (Numbers, calculations, etc.)"""
         return ('var_assign', p.NAME, p.expr)
 
-    @_(r'NAME "=" STRING')
-    def var_assign(self, p):
-        """Assign a string variable."""
-        return ('var_assign', p.NAME, p.STRING)
-
     @_(r'var_assign')
     def statement(self, p):
         """Request for variable assignation. Assign it."""
@@ -96,26 +91,52 @@ class LangParser(Parser):
         """If no calculation is needed. FX: BASIC> 6"""
         return (p.expr)
     
-    @_(r'STRING "+" STRING')
+    @_(r'expr CONCATENATE expr')
     def expr(self, p):
-        """Concatenate STRING with STRING."""
-        return ('concatenate', p.STRING0, p.STRING1)
+        """Concatenate expressions together."""
+        return ('concatenate', p.expr0, p.expr1)
     
-    @_(r'STRING "+" expr')
-    def expr(self, p):
-        """Concatenate STRING with expression."""
-        return ('concatenate', p.STRING, p.expr)
+    # @_(r'STRING "+" STRING')
+    # def expr(self, p):
+    #     """Concatenate STRING with STRING."""
+    #     return ('concatenate', p.STRING0, p.STRING1)
     
-    @_(r'expr "+" STRING')
-    def expr(self, p):
-        """Concatenate expression with STRING."""
-        return ('concatenate', p.expr, p.STRING)
+    # @_(r'STRING "+" expr')
+    # def expr(self, p):
+    #     """Concatenate STRING with expression."""
+    #     return ('concatenate', p.STRING, p.expr)
+    
+    # @_(r'expr "+" STRING')
+    # def expr(self, p):
+    #     """Concatenate expression with STRING."""
+    #     return ('concatenate', p.expr, p.STRING)
     
     @_(r'CONV_STR "(" expr ")"')
     def expr(self, p):
         """Convert {} to string."""
         return ('convert_str', p.expr)
+    
+    ##### END #####
+    ##### FUNCTION DEFINITION AND CALLING #####
 
+    @_(r'FUNCTION NAME "(" ")" ARROW statement')
+    def statement(self, p):
+        """Function definition."""
+        return ('fun_def', p.NAME, p.statement)
+    
+    @_(r'NAME "(" ")"')
+    def statement(self, p):
+        """Calling a function."""
+        return ('fun_call', p.NAME)
+    
+    ##### END #####
+    ##### FUNCTION DEFINITION AND CALLS #####
+
+    @_(r'INPUT "(" expr ")"')
+    def expr(self, p):
+        """Getting raw input from user."""
+        return ('get_input', p.expr)
+    
     ##### END #####
     ##### ADD, SUBTRACT, MULTIPLY AND DIVIDE NO PARENTHESES #####
 

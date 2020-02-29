@@ -19,3 +19,18 @@ if z >= 10 then show("Z is bigger than or equal to 10")
 
 !-- Remember when you concatenate strings together to convert the other datatypes to strings.
 show("The variable y is equal to " + string(y))
+!-- Concatenation can be performed with both + and ++
+!-- This is useful for when you just want to append an integer after another int without calculating them.
+show("Hello " ++ "World! " + "Hello...")
+x = 10
+y = 42
+!-- This would give 52.
+show(x+y)
+!-- THIS however, would give 1042 (Because you just concatenate them together as string)
+show(x++y)
+
+!-- Now function definitions and input from user also works!
+fun this_is_a() --> if get_input("What colour is your favourite? ") == "blue" then show("The user's favourite colour is blue!") else show("Why isn't your favourite colour blue???")
+
+!-- Call function.
+this_is_a()

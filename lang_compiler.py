@@ -33,11 +33,11 @@ if __name__ == '__main__':
                 # If we get <EOF> break loop.
                 if code == "<EOF>":
                     break
+
                 tree = parser.parse(lexer.tokenize(code))
 
                 # Run parsed tree and generate output.
                 Execute(tree, env)
-            
             
             # Break out of loop after execution.
             break

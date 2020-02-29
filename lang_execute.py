@@ -34,15 +34,12 @@ class Execute():
         # CLEAN RETURN STATEMENTS.
         if node[0] == 'num':
             return node[1]
-        # For clean strings.
-        if isinstance(node, str):
-            return str(node[1:][:-1])
         if node[0] == 'str':
             return str(node[1])
 
         # PRINT STRING AND EXPRESSIONS.
         if node[0] == 'print_str':
-            return str(node[1][1:][:-1])
+            return str(node[1])
         elif node[0] == 'print_expr':
             return self.walkTree(node[1])
         
@@ -58,15 +55,16 @@ class Execute():
         # ADD, SUBTRACT, MULTIPLY AND DIVIDE
         if node[0] == 'add':
             # Recursively call walkTree until tree is broken down.
+            # NOTE: THIS STATEMENT CAN ALSO BE USED AS CONCATENATION OF STRINGS AND SUCH.
             return self.walkTree(node[1]) + self.walkTree(node[2])
+
         elif node[0] == 'sub':
-            # Recursively call walkTree until tree is broken down.
             return self.walkTree(node[1]) - self.walkTree(node[2])
+
         elif node[0] == 'mul':
-            # Recursively call walkTree until tree is broken down.
             return self.walkTree(node[1]) * self.walkTree(node[2])
+
         elif node[0] == 'div':
-            # Recursively call walkTree until tree is broken down.
             return self.walkTree(node[1]) / self.walkTree(node[2])
         
         # IF STATEMENTS.
@@ -89,20 +87,41 @@ class Execute():
         
         # IF CONDITIONS.
         if node[0] == 'condition_eqeq':
-            # return result.
+            # Return result.
             return self.walkTree(node[1]) == self.walkTree(node[2])
+
         if node[0] == 'condition_greater':
-            # return result.
             return self.walkTree(node[1]) > self.walkTree(node[2])
+
         if node[0] == 'condition_lesser':
-            # return result.
             return self.walkTree(node[1]) < self.walkTree(node[2])
+
         if node[0] == 'condition_ge':
-            # return result.
             return self.walkTree(node[1]) >= self.walkTree(node[2])
+
         if node[0] == 'condition_le':
-            # return result.
             return self.walkTree(node[1]) <= self.walkTree(node[2])
+        
+        # FUNCTION DEFINITION AND CALLS.
+        if node[0] == 'fun_def':
+            self.env[node[1]] = node[2]
+        if node[0] == 'fun_call':
+            # Try to call the corresponding function stored in the env dict.
+            try:
+                return self.walkTree(self.env[node[1]])
+            except LookupError:
+                print("Undefined function '%s'" % node[1])
+                # Return None in bytes.
+                return b'\x00'
+        
+        # GET INPUT FROM USER.
+        if node[0] == 'get_input':
+            # Ask for input with desired "asking" string.
+            # Format input.
+            user_input = input(self.walkTree(node[1]))
+
+            # Return a clean string returned from input.
+            return self.walkTree(('str', user_input))
         
         # GET LOCAL VARIABLES FROM ENVIRONMENT.
         if node[0] == 'var':
