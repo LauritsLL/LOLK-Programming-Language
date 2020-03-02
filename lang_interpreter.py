@@ -1,5 +1,3 @@
-import os
-
 from lolkCore.lang_lexer import LangLexer
 from lolkCore.lang_parser import LangParser
 from lolkCore.lang_formatter import LangFormatter
@@ -41,11 +39,14 @@ if __name__ == '__main__':
                     in_func_state = True
                     continue
             else:
+                # We are currently defining function code,
+                # create a temporary input field for code for the function.
                 all_code.insert(len(all_code)-1, data)
                 code_already_inserted = True
                 while in_func_state:
                     func_code = input("...\t  ")
                     if func_code == '':
+                        # Quit defining code.
                         in_func_state = False
                     
                     # Add parsed tree to func_stmts.
@@ -56,9 +57,12 @@ if __name__ == '__main__':
                 
                 # Finally, add the function to the environment.
                 env[func_name] = func_stmts
+                # Reset func statements for new use.
+                func_stmts = []
         except EOFError:
             break
-
+        
+        print(env)
         # Add code to all code list if it is not empty.
         if data != '' and not code_already_inserted:
             all_code.insert(len(all_code)-1, data)
