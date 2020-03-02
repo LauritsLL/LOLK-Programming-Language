@@ -1,6 +1,5 @@
 import sys
 
-from lolkCore.lang_settings import LangSettings
 from lolkCore.lang_parser import LangParser
 from lolkCore.lang_lexer import LangLexer
 from lolkCore.lang_formatter import LangFormatter
@@ -8,11 +7,12 @@ from lolkCore.lang_formatter import LangFormatter
 class Execute():
     """Class to interpret and return correct output based on the tree from parser."""
 
-    def __init__(self, tree, env, all_code, curr_lineno):
+    def __init__(self, tree, env, all_code, curr_lineno, is_compiling=True):
         """Initiate variables before execution."""
         self.env = env
         self.tree = tree
         self.all_code = all_code
+        self.is_compiling = is_compiling
         self.curr_lineno = curr_lineno
 
         self.formatter = LangFormatter()
@@ -120,7 +120,7 @@ class Execute():
             return self.walkTree(node[1]) <= self.walkTree(node[2])
         
         # FUNCTION DEFINITION AND CALLS.
-        if node[0] == 'fun_def':
+        if node[0] == 'fun_def' and self.is_compiling:
             # Create statement from the indented lines of code following.
             code_statements = []
             for code_line in self.all_code[self.curr_lineno-0:]:

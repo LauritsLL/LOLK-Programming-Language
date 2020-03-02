@@ -2,6 +2,8 @@ import os
 
 from lolkCore.lang_lexer import LangLexer
 from lolkCore.lang_parser import LangParser
+from lolkCore.lang_formatter import LangFormatter
+from lolkCore.lang_settings import LangSettings
 from lolkCore.lang_execute import Execute
 
 
@@ -10,6 +12,10 @@ if __name__ == '__main__':
     lexer = LangLexer()
     parser = LangParser()
 
+    # For formatting the code so that the Execute class can understand it.
+    formatter = LangFormatter()
+    settings = LangSettings()
+
     # Keep track of variables when interpreter is running.
     env = {}
 
@@ -17,15 +23,44 @@ if __name__ == '__main__':
     curr_lineno = 1
     all_code = ['<EOF>']
 
+    in_func_state = False
+    func_stmts = []
+    func_name = ''
     # Infinite loop that accepts code.
     while True:
+        code_already_inserted = False
         try:
-            data = input('LOLK> ')
+            if not in_func_state:
+                data = input('LOLK> ')
+                formatted_code = formatter.format_code(data)
+                parsed = parser.parse(lexer.tokenize(data))
+                if parsed is None:
+                    continue
+                if parsed[0] == 'fun_def':
+                    func_name = parsed[1]
+                    in_func_state = True
+                    continue
+            else:
+                all_code.insert(len(all_code)-1, data)
+                code_already_inserted = True
+                while in_func_state:
+                    func_code = input("...\t  ")
+                    if func_code == '':
+                        in_func_state = False
+                    
+                    # Add parsed tree to func_stmts.
+                    parsed = parser.parse(lexer.tokenize(func_code))
+                    if not parsed is None:
+                        func_stmts.append(parsed)
+                        all_code.insert(len(all_code)-1, func_code)
+                
+                # Finally, add the function to the environment.
+                env[func_name] = func_stmts
         except EOFError:
             break
-        
+
         # Add code to all code list if it is not empty.
-        if data != '':
+        if data != '' and not code_already_inserted:
             all_code.insert(len(all_code)-1, data)
         
         # If we got data successfully - generate tokens for parser.
@@ -34,5 +69,5 @@ if __name__ == '__main__':
             tree = parser.parse(lexer.tokenize(data))
 
             # Run parsed tree and generate output.
-            Execute(tree, env, all_code, curr_lineno)
+            Execute(tree, env, all_code, curr_lineno, is_compiling=False)
             curr_lineno += 1

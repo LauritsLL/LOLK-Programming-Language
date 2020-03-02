@@ -29,7 +29,7 @@ show(x+y)
 !-- THIS however, would give 1042 (Because you just concatenate them together as string)
 show(x++y)
 
-!-- Now function definitions and input from user also works!
+!-- Now function definitions in multiple lines also work (This also applies for interpreter!)
 fun get_fav_col() --> 
     show("Hello")
     show("Multiple lines!")

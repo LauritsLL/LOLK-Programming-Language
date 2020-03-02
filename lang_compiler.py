@@ -12,7 +12,7 @@ def check_for_keywords(formatted_code_line):
     settings = LangSettings()
     # Ignore code lines that has <INFUNC> in it.
     if formatted_code_line.find(settings.in_function) != -1:
-        return (True, 'ignore')
+        return (True, 'infunc')
 
 
 # Run compiler on a file.
@@ -54,7 +54,7 @@ if __name__ == '__main__':
                 formatted_code = formatter.format_code(code)
                 # Check for keywords.
                 k = check_for_keywords(formatted_code)
-                if k == (True, 'ignore'):
+                if k == (True, 'infunc'):
                     # If the current line of code is in a function don't run.
                     continue
                 
