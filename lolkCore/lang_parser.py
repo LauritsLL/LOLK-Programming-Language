@@ -96,21 +96,6 @@ class LangParser(Parser):
         """Concatenate expressions together."""
         return ('concatenate', p.expr0, p.expr1)
     
-    # @_(r'STRING "+" STRING')
-    # def expr(self, p):
-    #     """Concatenate STRING with STRING."""
-    #     return ('concatenate', p.STRING0, p.STRING1)
-    
-    # @_(r'STRING "+" expr')
-    # def expr(self, p):
-    #     """Concatenate STRING with expression."""
-    #     return ('concatenate', p.STRING, p.expr)
-    
-    # @_(r'expr "+" STRING')
-    # def expr(self, p):
-    #     """Concatenate expression with STRING."""
-    #     return ('concatenate', p.expr, p.STRING)
-    
     @_(r'CONV_STR "(" expr ")"')
     def expr(self, p):
         """Convert {} to string."""
