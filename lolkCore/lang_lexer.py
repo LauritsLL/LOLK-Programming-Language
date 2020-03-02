@@ -10,8 +10,8 @@ class LangLexer(Lexer):
         FUNCTION, ARROW,
         }
 
-    # Ignore spaces and tabs.
-    ignore = "\t "
+    # Ignore spaces.
+    ignore = " "
 
     # One-character literals.
     literals = {'=', '+', '-', '*', '/', '(', ')', ',', ';'}

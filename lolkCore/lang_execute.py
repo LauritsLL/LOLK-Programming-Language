@@ -1,21 +1,38 @@
 import sys
 
+from lolkCore.lang_settings import LangSettings
+from lolkCore.lang_parser import LangParser
+from lolkCore.lang_lexer import LangLexer
+from lolkCore.lang_formatter import LangFormatter
+
 class Execute():
     """Class to interpret and return correct output based on the tree from parser."""
 
-    def __init__(self, tree, env):
+    def __init__(self, tree, env, all_code, curr_lineno):
         """Initiate variables before execution."""
         self.env = env
         self.tree = tree
+        self.all_code = all_code
+        self.curr_lineno = curr_lineno
+
+        self.formatter = LangFormatter()
+        self.parser = LangParser()
+        self.lexer = LangLexer()
+
+        # Execute parse tree and show output.
+        self.show_result()
+
+    def show_result(self):
+        """Show the result outputted from tree."""
         # Pass whole tree as argument.
-        result = self.walkTree(tree)
+        result = self.walkTree(self.tree)
 
         # Print result based on what walkTree returned.
         if result is not None and isinstance(result, int) or isinstance(result, float):
             print(result)
         if result is not None and isinstance(result, str):
             print(result)
-
+    
     def walkTree(self, node):
         """
            Recursively call walkTree until tree is broken down to it's simplest form.
@@ -104,11 +121,26 @@ class Execute():
         
         # FUNCTION DEFINITION AND CALLS.
         if node[0] == 'fun_def':
-            self.env[node[1]] = node[2]
+            # Create statement from the indented lines of code following.
+            code_statements = []
+            for code_line in self.all_code[self.curr_lineno-0:]:
+                if self.formatter.indented(code_line)[0]:
+                    # Parse and add statement.
+                    code_statements.append(self.parser.parse(self.lexer.tokenize(code_line.lstrip())))
+                elif not self.formatter.indented(code_line)[0]:
+                    # We are done defining function; break.
+                    break
+            
+            # Set the env key to the function name and the value to the code statements.
+            self.env[node[1]] = code_statements
         if node[0] == 'fun_call':
             # Try to call the corresponding function stored in the env dict.
+            # (Starting from the line number identifier.)
             try:
-                return self.walkTree(self.env[node[1]])
+                # And execute all the lines.
+                for code_stmt in self.env[node[1]]:
+                    Execute(code_stmt, 
+                    self.env, self.all_code, self.curr_lineno)
             except LookupError:
                 print("Undefined function '%s'" % node[1])
                 # Return None in bytes.

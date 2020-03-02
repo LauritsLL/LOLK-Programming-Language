@@ -1,6 +1,6 @@
 from sly import Parser
 
-from lang_lexer import LangLexer
+from lolkCore.lang_lexer import LangLexer
 
 
 class LangParser(Parser):
