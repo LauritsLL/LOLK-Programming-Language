@@ -62,7 +62,6 @@ if __name__ == '__main__':
         except EOFError:
             break
         
-        print(env)
         # Add code to all code list if it is not empty.
         if data != '' and not code_already_inserted:
             all_code.insert(len(all_code)-1, data)
