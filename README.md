@@ -1,1 +1,29 @@
-IyBMT0xLCgojIyBJbnN0YWxsYXRpb24KVGhpcyBwcm9qZWN0IGRlcGVuZHMgb24gdGhlIGBzbHlgIGxpYnJhcnkuCkluc3RhbGwgaXQgd2l0aDogYCQgcGlwMyBpbnN0YWxsIHNseWAKClRoZW4geW91IG5lZWQgdG8sCjEuIENsb25lIHRoZSByZXBvc2l0b3J5OiBgZ2l0IGNsb25lIGh0dHBzOi8vZ2l0aHViLmNvbS9MYXVyaXRzTEwvTE9MSy1Qcm9ncmFtbWluZy1MYW5ndWFnZS5naXRgCjIuIFJ1biB0aGUgYGxhbmdfaW50ZXJwcmV0ZXIucHlgIG9yIHRoZSBgbGFuZ19jb21waWxlci5weWAgZmlsZSwgd2hpY2ggZGVwZW5kcyBvbiBpZiB5b3Ugd2FudCB0byB1c2UgdGhlIGluLWJ1aWx0IGludGVycHJldGVyIG9yIFtjb21waWxlXSgjdXNlX2NvbXBpbGVyKSBhIGZpbGUuCgojIyBVc2UgdGhlIGluLWJ1aWx0IGludGVycHJldGVyLgpSdW4gdGhlIGZpbGUgYGxhbmdfaW50ZXJwcmV0ZXIucHlgIGFuZCBpdCB3aWxsIGF1dG9tYXRpY2FsbHkgZW50ZXIgdGhlIHByb21wdCwgd2hlcmUgeW91IGNhbiB0eXBlIGNvZGUuCgojIyA8YSBuYW1lPSJ1c2VfY29tcGlsZXIiPjwvYT5Vc2UgdGhlIGNvbXBpbGVyClRvIGNvbXBpbGUgeW91ciBvd24gZmlsZXMsIHJ1biB0aGUgYGxhbmdfY29tcGlsZXIucHlgIGZpbGUsIGFuZCB0eXBlIGluIHRoZSBwYXRoIHRvIHlvdXIgZmlsZS4gRi5leC46CgpgV2hhdCBmaWxlIGRvIHlvdSB3YW50IHRvIHVzZSAoU3RhcnRpbmcgaW4gcm9vdCBkaXJlY3Rvcnkge0RJUkVDVE9SWX0pIHRlc3RfbGFuZy5sb2xrYAoKVGhpcyB3b3VsZCBydW4gdGhlIGludGVycHJldGVyIG9uIHRoZSBgdGVzdF9sYW5nLmxvbGtgIGZpbGUgYW5kIGRpc3BsYXkgdGhlIG91dHB1dCBpbiByZWFsLXRpbWUuCgojIyBBdXRob3JzCgoqICoqTGF1cml0cyBMLiBMb2xjayoqIC0gKk1haW4gZGV2ZWxvcGVyIG9mIHByb2plY3QqCgojIyBVc2Ugb2YgdGhpcyBjb2RlCgpUaGlzIGNvZGUgY2FuIGJlIHVzZWQgZnJlZWx5IGNvbW1lcmNpYWxseSBvciBwZXJzb25hbC4KCj4gQnV0IEkgd291bGQgdmVyeSBtdWNoIGFwcHJlY2lhdGUgaWYgeW91IHdvdWxkIGFja25vd2xlZGdlIG1lIGluIHlvdXIgY29kZSBhbmQgbGluayB0byB0aGlzIHByb2plY3QuCg==
+# LOLK
+
+## Installation
+This project depends on the `sly` library.
+Install it with: `$ pip3 install sly`
+
+Then you need to,
+1. Clone the repository: `git clone https://github.com/Lause132/LOLK-Programming-Language.git`
+2. Run the `lang_interpreter.py` or the `lang_compiler.py` file, which depends on if you want to use the in-built interpreter or [compile](#use_compiler) a file.
+
+## Use the in-built interpreter.
+Run the file `lang_interpreter.py` and it will automatically enter the prompt, where you can type code.
+
+## <a name="use_compiler"></a>Use the compiler
+To compile your own files, run the `lang_compiler.py` file, and type in the path to your file. F.ex.:
+
+`What file do you want to use (Starting in root directory {DIRECTORY}) test_lang.lolk`
+
+This would run the interpreter on the `test_lang.lolk` file and display the output in real-time.
+
+## Authors
+
+* **Laurits L. Lolck** - *Main developer of project*
+
+## Use of this code
+
+This code can be used freely commercially or personal.
+
+> But I would very much appreciate if you would acknowledge me in your code and link to this project.
